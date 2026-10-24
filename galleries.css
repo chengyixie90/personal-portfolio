@@ -1,0 +1,20 @@
+.flow-page .sequence-gallery{display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:calc((100% - 40px)/3);gap:20px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding-bottom:16px;scrollbar-width:thin;scrollbar-color:#a4bcc6 #e8eef0;cursor:grab}
+.flow-page .sequence-gallery>figure{min-width:0;margin:0;scroll-snap-align:start}
+.flow-page .sequence-gallery img{width:100%;height: min(52svh,460px);object-fit:contain;-webkit-user-drag:none;user-select:none}
+.flow-page #suit-carousel{grid-auto-columns:calc((100% - 20px)/2)}
+.flow-page #suit-carousel img{height:min(65svh,620px);object-fit:contain}
+.sequence-gallery.is-dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.sequence-gallery:focus-visible{outline:2px solid #6b96aa;outline-offset:5px}
+.gallery-group>.carousel-controls{margin-top:16px}
+@media(max-width:900px){.flow-page .sequence-gallery{grid-auto-columns:calc((100% - 20px)/2)}}
+@media(max-width:650px){.flow-page .sequence-gallery,.flow-page #suit-carousel{grid-auto-columns:88%;gap:14px}.flow-page .sequence-gallery img{height:min(56svh,460px)}.flow-page #suit-carousel img{height:min(62svh,560px)}}
+@media print{.flow-page .sequence-gallery,.flow-page #suit-carousel{grid-template-columns:repeat(2,1fr);grid-auto-flow:row;overflow:visible}.gallery-group>.carousel-controls{display:none}}
+@media print{[data-loop-clone]{display:none!important}}
+.flow-page #suit-carousel>figure{grid-column:auto;grid-row:auto}
+.poetry-page #poetry-photo-carousel{grid-auto-columns:calc((100% - 24px)/2);gap:24px;margin-top:0;scrollbar-color:#afa18a #eae3d7}.poetry-page #poetry-photo-carousel img{height:min(65svh,620px);object-fit:contain;background:#eae3d7}.poetry-page #poetry-physical>.carousel-controls{margin:28px 0 18px}.poetry-page #poetry-physical .carousel-controls button:hover{background:#eae3d7}
+@media(max-width:650px){.poetry-page #poetry-photo-carousel{grid-auto-columns:88%;gap:14px}.poetry-page #poetry-photo-carousel img{height:min(60svh,560px)}}
+@media print{.poetry-page #poetry-photo-carousel{grid-template-columns:repeat(2,1fr);grid-auto-flow:row;overflow:visible}}
+.king-physical{margin-top:55px;scroll-margin-top:175px}.king-photo-intro{font-size:12px;line-height:2;color:var(--muted);margin:15px 0 28px}.king-page #king-photo-carousel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;overflow:visible}.king-page #king-photo-carousel img{height:min(68svh,650px);object-fit:contain;background:#eae8e0}.king-page #king-photo-carousel figcaption{font-size:10px;line-height:1.9;color:var(--muted);margin-top:12px}
+@media(max-width:650px){.king-page #king-photo-carousel{grid-template-columns:1fr;gap:24px}.king-page #king-photo-carousel img{height:min(60svh,560px)}}
+@media print{.king-page #king-photo-carousel{grid-template-columns:repeat(2,1fr);grid-auto-flow:row;overflow:visible}}
+.king-photo-grid>figure{margin:0;min-width:0}.king-photo-grid img{display:block;width:100%}

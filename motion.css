@@ -1,0 +1,71 @@
+/* Quiet motion: typography and layout remain unchanged. */
+body{overflow-x:clip}
+:root{--motion-ease:cubic-bezier(.22,1,.36,1)}
+header nav a,.case-nav a,.text-link,.case-next a,footer a,.contact-bottom a{transition:color .22s ease,background-size .28s var(--motion-ease);background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:0 100%;background-size:0 1px}
+header nav a:hover,header nav a:focus-visible,.case-nav a:hover,.case-nav a:focus-visible,.case-nav a.active,.case-next a:hover,footer a:hover{background-size:100% 1px}
+.text-link span{transition:transform .28s var(--motion-ease)}
+.text-link:hover span,.text-link:focus-visible span{transform:translate(3px,-3px)}
+.filters button,.guide-tabs button,header button,.viewer-bar button{transition:color .2s,background-color .2s,border-color .2s}
+.image-open{transition:transform .35s var(--motion-ease)}
+.image-open:active{transform:scale(.995)}
+details>summary{transition:color .2s}
+details>summary:hover{color:#668da4}
+@media(hover:hover) and (pointer:fine){.project .cover>img{transition:transform .65s var(--motion-ease)}.project:hover .cover>img,.project:focus-visible .cover>img{transform:scale(1.018)}.image-open:hover{transform:translateY(-2px)}}
+/* Native dialog lifecycle keeps focus trapping, Escape, and focus restoration. */
+@supports(transition-behavior:allow-discrete){
+#image-viewer{opacity:0;transform:translateY(8px) scale(.99);transition:opacity .2s ease,transform .28s var(--motion-ease),display .2s allow-discrete,overlay .2s allow-discrete}
+#image-viewer[open]{opacity:1;transform:translateY(0) scale(1)}
+#image-viewer::backdrop{opacity:0;transition:opacity .2s,display .2s allow-discrete,overlay .2s allow-discrete}
+#image-viewer[open]::backdrop{opacity:1}
+@starting-style{#image-viewer[open]{opacity:0;transform:translateY(8px) scale(.99)}#image-viewer[open]::backdrop{opacity:0}}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+@media print{*{opacity:1!important;transform:none!important}}
+
+/* First-load typography: each glyph rises through its own clipped window. */
+.hero-intro-pending .hero-copy,.hero-intro-pending .hero-art{opacity:0}
+.hero-copy .char-mask{display:inline-block;overflow:clip;vertical-align:bottom;line-height:inherit;color:inherit}
+.hero-copy .char-glyph{display:inline-block;color:inherit;white-space:pre;line-height:inherit}
+.hero h1 span.char-mask,.hero h1 span.char-glyph{color:inherit}
+.hero-copy .text-link .char-mask,.hero-copy .text-link .char-glyph{font-size:inherit;transform:none}
+.hero-copy .text-link>span:not(.char-mask){font-size:24px}
+a.project{display:block;color:inherit;text-decoration:none;font:inherit}
+a.project:hover{color:inherit}
+.flow-cover-copy>.feature-link{display:inline-block;margin-top:12px;font-size:11px;letter-spacing:1px}
+@media(hover:hover) and (pointer:fine){
+.project .feature-row-art img,.project .poetry-feature-art img{transition:transform .7s var(--motion-ease);transform-origin:50% 55%}
+.project:hover .feature-row-art img,.project:focus-visible .feature-row-art img,.project:hover .poetry-feature-art img,.project:focus-visible .poetry-feature-art img{transform:translateY(-7px) scale(1.025)}
+.project .flow-cover-art img{transition:transform .75s var(--motion-ease)}
+.project:hover .flow-cover-art img:first-child,.project:focus-visible .flow-cover-art img:first-child{transform:translate(-5px,-8px) rotate(-12deg)}
+.project:hover .flow-cover-art img+img,.project:focus-visible .flow-cover-art img+img{transform:translate(6px,-5px) rotate(12deg)}
+}
+#contact::before{display:none}
+#contact .contact-line{display:block;position:static;font:inherit;color:inherit;letter-spacing:inherit}
+#contact .contact-arrow{font-weight:400}
+.contact-orbit{position:absolute;right:-5%;top:-40%;width:60%;height:140%;pointer-events:none;border:1px solid #afc8d0;border-radius:50%;rotate:-25deg}
+.contact-dot{position:absolute;right:21%;top:15%;width:30px;height:30px;border-radius:50%;background:#f1eab5;pointer-events:none;box-shadow:0 0 22px #f1eab555}
+#contact .contact-bottom{border-top:0}
+#contact .contact-bottom::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:#b8cdd6;transform:scaleX(var(--contact-line-progress,1));transform-origin:left}
+@media(max-width:650px){.contact-dot{width:20px;height:20px;right:14%;top:7%}.contact-orbit{width:110%;right:-40%}}
+@media(prefers-reduced-motion:reduce){.hero-intro-pending .hero-copy,.hero-intro-pending .hero-art{opacity:1}#contact [style]{opacity:1!important;transform:none!important}}
+
+.hero h1 span.char-run{color:inherit}.hero-copy .text-link .char-run{display:inline-flex;gap:0;font-size:inherit}.hero-copy .text-link>span.char-run{font-size:inherit}
+
+html{overflow-x:clip}
+
+/* Pinned navigation, with matching anchor and project chapter offsets. */
+header{position:sticky;top:0;z-index:30;isolation:isolate;background:var(--paper)}
+header::before{content:'';position:absolute;inset:0 -6.18%;z-index:-1;background:var(--paper);border-bottom:1px solid var(--line)}
+html{scroll-padding-top:114px}.case-nav{top:94px}
+.contact-mask{overflow:clip}
+.contact-mask-ink{display:block;will-change:transform,opacity}
+#contact h2 .contact-mask-ink{font:inherit;color:inherit;letter-spacing:inherit}
+#contact .resume-block>a>.contact-mask-ink{display:flex;justify-content:space-between;align-items:center;width:100%;gap:25px}
+#contact .contact-details>a{font-size:13px;margin:0 0 8px;padding-bottom:5px}
+#contact .resume-block{align-self:start;padding-top:0}
+@media(max-width:650px){html{scroll-padding-top:95px}.case-nav{top:75px}#contact .resume-block{padding-top:20px}}
+@media(prefers-reduced-motion:reduce){.hero-copy,.hero-art,.project,.about-grid>div{translate:none!important;scale:none!important;opacity:1!important}.contact-mask-ink{transform:none!important;opacity:1!important}}
+@media print{header{position:static}*,*::before,*::after{translate:none!important;scale:none!important}.contact-mask-ink{transform:none!important;opacity:1!important}}
+/* Public navigation after removing authoring controls. */
+body>header{display:flex;justify-content:space-between;align-items:center;gap:24px}body>header nav{margin-left:auto;justify-self:end}body>footer{display:flex;justify-content:space-between;gap:20px}
+@media(max-width:650px){body>header{gap:12px}body>header nav{gap:14px}.logo span{letter-spacing:1px}body>footer{gap:12px}}

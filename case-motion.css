@@ -1,0 +1,19 @@
+/* Project scroll reveals use opacity only; their final state is stable. */
+/* Native horizontal scrolling works without scripting, autoplay, or wheel hijacking. */
+.flow-page #flow-carousel{position:relative;display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:calc((100% - 40px)/3);gap:20px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:0;overscroll-behavior-x:contain;padding:0 0 16px;scrollbar-width:thin;scrollbar-color:#a4bcc6 #e8eef0;cursor:grab}
+#flow-carousel>figure{scroll-snap-align:start;min-width:0}
+#flow-carousel img{-webkit-user-drag:none;user-select:none}
+#flow-carousel.is-dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
+#flow-carousel .image-open{cursor:zoom-in}
+.carousel-controls{display:flex;align-items:center;justify-content:space-between;margin:12px 0 18px;font-size:10px;color:var(--muted);letter-spacing:1px}
+.carousel-controls>div{display:flex;gap:10px}
+.carousel-controls button{border:1px solid var(--line);background:transparent;width:38px;height:34px;font-size:18px;transition:background .2s,color .2s}
+.carousel-controls button:hover{background:#e1ebee}
+.carousel-controls button:disabled{opacity:.35;cursor:default}
+@media(max-width:900px){.flow-page #flow-carousel{grid-auto-columns:calc((100% - 20px)/2)}}
+@media(max-width:650px){.flow-page #flow-carousel{grid-auto-columns:86%;gap:14px}.carousel-controls{margin-top:10px}.selected-heading{gap:12px;flex-wrap:wrap}.selected-heading>span{font-size:9px}}
+@media(prefers-reduced-motion:reduce){[data-case-reveal]{translate:none!important;opacity:1!important;transform:none!important}#flow-carousel{scroll-behavior:auto!important}}
+@media print{.flow-page #flow-carousel{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-flow:row;overflow:visible}.carousel-controls{display:none}}
+
+#flow-carousel img{height:min(58vh,560px);height:min(58svh,560px);width:100%;object-fit:contain}
+@media(max-width:650px){#flow-carousel img{height:min(64vh,560px);height:min(64svh,560px)}}
