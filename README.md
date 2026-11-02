@@ -1,6 +1,6 @@
 # 谢易宸 · 个人作品集
 
-静态个人作品集网站，包含首页、FLOW TAROT、缥缈诗篇、国王剧场、短视频广告四个项目。
+静态个人作品集网站，包含首页、FLOW TAROT、缥缈诗篇、国王剧场、短视频广告、流形原创塔罗网站五个项目。
 
 ## 运行
 
@@ -15,7 +15,7 @@ python3 -m http.server 8080
 ## 目录
 
 - `index.html`：首页及简历入口
-- `flow.html`、`poetry.html`、`king.html`、`ads.html`：项目独立页
+- `flow.html`、`poetry.html`、`king.html`、`ads.html`、`liuxing.html`：项目独立页
 - `assets/`：图片、视频
 - `documents/`：简历及中英文说明书 PDF
 - CSS、JavaScript：布局、滚动渐显、画廊与图片弹窗
