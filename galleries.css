@@ -18,3 +18,6 @@
 @media(max-width:650px){.king-page #king-photo-carousel{grid-template-columns:1fr;gap:24px}.king-page #king-photo-carousel img{height:min(60svh,560px)}}
 @media print{.king-page #king-photo-carousel{grid-template-columns:repeat(2,1fr);grid-auto-flow:row;overflow:visible}}
 .king-photo-grid>figure{margin:0;min-width:0}.king-photo-grid img{display:block;width:100%}
+
+/* A horizontal sequence must start at its first slide, including portrait material. */
+.flow-page .sequence-gallery.portrait{justify-content:start}
