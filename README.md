@@ -1,35 +1,28 @@
 # 谢易宸 · 个人作品集
 
-静态个人作品集网站，包含首页、FLOW TAROT、缥缈诗篇、国王剧场、短视频广告、流形原创塔罗网站五个项目。
+静态个人作品集网站：缥缈诗篇、FLOW TAROT、国王剧场、短视频广告、流形五个项目。当前内容修订日期：2026-11-10。
 
-## 运行
+## 运行和部署
 
-无需安装依赖或编译。用任意静态 HTTP 服务打开根目录，例如：
+无需安装依赖或编译。可使用任意静态 HTTP 服务预览根目录，例如 `python3 -m http.server 8080`，然后访问 `http://localhost:8080`。
 
-```sh
-python3 -m http.server 8080
-```
+可部署到腾讯云 CloudBase / COS 静态托管、Vercel 或普通静态服务器；网站根目录放置 `index.html`。`flow/` 等目录入口兼容此前分享的项目短网址。
 
-打开 http://localhost:8080。
+## 文件
 
-## 目录
+- `index.html`：首页、关于与联系信息。
+- `poetry.html`、`flow.html`、`king.html`、`ads.html`、`liuxing.html`：五个项目独立页。
+- `assets/`：实际使用的图片与视频，包含流形新版高清截图。
+- `documents/`：个人简历、中英文说明书与流形导出示例。
+- `print-portfolio/`：28 页 PDF、内嵌图片的可打印 HTML 与打印说明。
+- CSS / JavaScript：响应式排版、滚动渐显、横向画廊和图片弹窗。
 
-- `index.html`：首页及简历入口
-- `flow.html`、`poetry.html`、`king.html`、`ads.html`、`liuxing.html`：项目独立页
-- `assets/`：图片、视频
-- `documents/`：简历及中英文说明书 PDF
-- CSS、JavaScript：布局、滚动渐显、画廊与图片弹窗
+## 内容维护
 
-## 部署
+下载简历指向 `documents/谢易宸-个人简历.pdf`，旧文件作为兼容副本保留。英文说明书附件为所提供版本，目录仍有占位文字，作品集已明确标为排版样张。
 
-可上传到腾讯云 COS / CloudBase 静态网站托管，或普通静态服务器。网站根目录直接放置 index.html，索引文档设为 index.html。
-
-所有项目采用相对链接，可部署于域名根目录或子目录。无需 Node.js、数据库或后端服务。
-
-## 内容更新
-
-修改对应 HTML、CSS 或 JavaScript 后重新部署。首页简历入口指向 `documents/谢易宸-文案编辑.pdf`；旧 resume.pdf 作为兼容文件保留。
+修改后重新部署对应文件。PDF 中的网址与二维码保留腾讯云正式地址；GitHub 推送本身不代表腾讯云文件已同步。
 
 ## 素材说明
 
-项目图片、文本、视频及 PDF 包含个人作品及团队项目展示资料。本仓库不自动授予素材使用许可，团队署名及个人贡献边界见相应项目页。
+素材含个人作品与团队项目资料；署名与个人职责见相应项目页面。仓库不自动授予素材使用许可。
