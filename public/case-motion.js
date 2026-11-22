@@ -7,15 +7,18 @@
   // Include project analysis and tool demonstrations added after the original reveal pass.
   // Reveal individual content groups, avoiding nested opacity on their children.
   selectors.push(
+    '[data-editor-reveal="inherit"]',
     '.ad-overview>article,.guide-detail, .flow-reading-heading,.guide-contributions,.proposal-logic,.proposal-reasons>article,.proposal-reasons>div,.proposal-summary',
     '.ad15-brief,.ad15-story>h3,.ad15-story>p,.ad15-shots>figure,.ad15-chain>div,.ad15-ui-note,.ad15-work',
     '.ad30-brief,.ad30-story>h3,.ad30-story>p,.ad30-shots>figure,.ad30-chain>div,.ad30-message,.ad30-work',
     '.ad60-brief,.ad60-story>h3,.ad60-story>p,.ad60-chain>li,.ad60-shots>figure,.ad60-message,.ad60-work',
     '.lx-hero>figure,.lx-benefits>article,.lx-screen>figure,.lx-two-notes>div,.lx-export-heading,.lx-exports>article,.lx-record-note,.lx-tradeoff,.lx-state',
-    '.liuxing-page .work-chain,.platform-heading,.flow-platform>figure,.flow-platform>.platform-note,.flow-platform>.text-link'
+    '.liuxing-page .work-chain,.platform-heading,.flow-platform>figure,.flow-platform>.platform-note,.flow-platform>.text-link',
+    '.liushun-page .ls-screen,.ls-points>article,.ls-notes>div,.ls-record-copy>article,.ls-status'
   );
   selectors.forEach(selector=>document.querySelectorAll(selector).forEach(element=>{
-    if (states.has(element) || element.closest('dialog') || element.querySelector('video')) return;
+    if (states.has(element) || element.closest('dialog,[data-editor-motion="off"]') ||
+        (element.querySelector('video') && !element.hasAttribute('data-editor-reveal'))) return;
     states.set(element,{element,progress:0,done:false});
     element.dataset.caseReveal='pending';
   }));

@@ -1,6 +1,6 @@
+/node_modules/
+/dist/
+/.vercel/
+/.editor-local/
+.env*
 .DS_Store
-Thumbs.db
-.env
-.env.*
-node_modules/
-*.log

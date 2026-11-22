@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>编辑作品集</title>
+<link rel="stylesheet" href="/portfolio-admin.css">
+<script src="/portfolio-rules.js" defer></script>
+<script src="/portfolio-home.js" defer></script>
+<script src="/portfolio-scroll.js" defer></script>
+<script src="/portfolio-admin.js" defer></script>
+</head>
+<body>
+<header class="app-header">
+  <a class="brand" href="/">谢易宸 <span>PORTFOLIO</span></a>
+  <div class="page-controls">
+    <label for="page-switch" class="visually-hidden">编辑页面</label>
+    <select id="page-switch" disabled><option>正在读取页面…</option></select>
+    <button type="button" id="new-project" disabled>新建项目</button>
+  </div>
+  <div class="app-actions">
+    <span id="save-status" role="status">正在读取草稿…</span>
+    <a class="view-site" href="/" target="_blank" rel="noopener">查看已发布网站</a>
+    <button type="button" id="publish-button" class="primary" disabled>发布草稿</button>
+    <a href="/admin?change=1">修改密钥</a>
+    <button type="button" id="logout-button">退出</button>
+  </div>
+</header>
+<div class="workspace">
+  <aside id="editor" class="editor" aria-label="属性设置">
+    <p class="empty">正在读取作品集…</p>
+  </aside>
+  <section id="preview" class="live-editor" aria-labelledby="preview-title">
+    <div class="canvas-top"><div><h2 id="preview-title">页面编辑</h2>
+      <p id="canvas-hint">点击页面里的文字、图片或区块开始编辑。</p></div>
+      <div class="actions">
+        <button type="button" data-size="desktop" aria-pressed="true">桌面</button>
+        <button type="button" data-size="mobile" aria-pressed="false">手机</button>
+        <button type="button" id="sync-button" aria-pressed="true">滚动同步</button>
+        <button type="button" id="mode-button" aria-pressed="false">体验动效</button>
+        <button type="button" id="inspector-button" aria-expanded="true" aria-controls="editor">隐藏设置</button>
+      </div>
+    </div>
+    <div class="preview-canvas"><iframe title="实时编辑作品页面"></iframe></div>
+    <p id="canvas-status" role="status"></p>
+  </section>
+
+</div>
+<dialog id="picker" aria-labelledby="picker-title">
+  <div class="dialog-top"><h2 id="picker-title">选择素材</h2><button type="button" data-close>关闭</button></div>
+  <div class="picker-body">
+    <div class="actions"><label class="upload">上传文件<input type="file" id="picker-upload"></label><p id="picker-note" role="status"></p></div>
+    <label class="field">搜索素材<input id="asset-search" type="search" placeholder="文件名"></label>
+    <div id="picker-media" class="asset-list"></div>
+  </div>
+</dialog>
+</body>
+</html>

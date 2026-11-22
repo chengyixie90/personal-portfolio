@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1795327200000,
+      "tag": "0000_portfolio_editor",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1795381200000,
+      "tag": "0001_editor_access",
+      "breakpoints": true
+    }
+  ]
+}

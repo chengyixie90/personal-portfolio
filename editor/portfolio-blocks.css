@@ -1,0 +1,31 @@
+.portfolio-block { scroll-margin-top: 155px; }
+.portfolio-block h2 { margin: 0 0 1.3rem; font-size: clamp(1.45rem, 3vw, 2.6rem); font-weight: 400; line-height: 1.4; }
+.portfolio-block.width-normal > :where(.portfolio-copy, h2, figure, video, .portfolio-caption) { max-width: 57rem; margin-inline: auto; }
+.portfolio-block .portfolio-copy { line-height: 1.95; font-size: 1rem; color: var(--ink); }
+.portfolio-block :is(.portfolio-copy, h2) + :where(figure, .portfolio-image-grid, .gallery-group, video) { margin-top: 1.7rem; }
+.portfolio-block.space-tight { padding-block: clamp(1.5rem, 3vw, 3rem); }
+.portfolio-block.space-loose { padding-block: clamp(4rem, 10vw, 10rem); }
+.portfolio-block figure, .portfolio-hero { margin: 0; min-width: 0; }
+.portfolio-block figcaption, .portfolio-caption { padding-top: .8rem; color: var(--muted); line-height: 1.6; font-size: .875rem; }
+.portfolio-block .portfolio-media { display: block; width: 100%; padding: 0; border: 0; background: var(--paper); }
+.portfolio-block .portfolio-media img, .portfolio-hero img { display: block; width: 100%; max-height: 680px; object-fit: contain; }
+.portfolio-video { display: block; width: 100%; max-height: 720px; background: #14232b; object-fit: contain; }
+.portfolio-video.ratio-portrait { width: min(100%, 340px); margin-inline: auto; }
+.ratio-landscape { aspect-ratio: 16 / 9; }
+.ratio-portrait { aspect-ratio: 9 / 16; }
+.ratio-square { aspect-ratio: 1; }
+.portfolio-media:not(.ratio-auto) img { height: 100%; width: 100%; object-fit: contain; }
+.portfolio-split, .portfolio-image-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: clamp(1rem, 5vw, 4rem); align-items: center; }
+.portfolio-split.image-left figure { order: -1; }
+.portfolio-gallery { --gallery-cols: 3; }
+.portfolio-gallery > figure { padding: .65rem; background: color-mix(in srgb, var(--ink) 6%, var(--paper)); }
+.portfolio-gallery .portfolio-media img { max-height: 30rem; }
+.portfolio-card-cover img { width: 100%; height: 100%; object-fit: cover; display:block; }
+.portfolio-placeholder { min-height: 10rem; display: grid; place-items: center; color: var(--muted); background:#dfe9ed; }
+.portfolio-editable .case-nav { justify-content: flex-start; overflow-x: auto; gap: clamp(1rem, 5vw, 4rem); }
+.portfolio-editable .case-nav a { flex: 0 0 auto; }
+@media (max-width: 680px) {
+  .portfolio-split, .portfolio-image-grid { grid-template-columns: 1fr; }
+  .portfolio-split.image-left figure { order: 0; }
+  .portfolio-gallery { --gallery-cols: 1; }
+}

@@ -58,7 +58,7 @@
     if (!copy || !root.classList.contains('hero-intro-pending') || preference.matches) {
       root.classList.remove('hero-intro-pending'); return;
     }
-    const pieces = [copy.querySelector('.hero-kicker'),copy.querySelector('h1'),copy.querySelector('[data-edit="intro"]'),copy.querySelector('.text-link')];
+    const pieces = [copy.querySelector('.hero-kicker'),copy.querySelector('h1'),copy.querySelector('[data-edit="intro"],.portfolio-home-intro'),copy.querySelector('.text-link')];
     const restores = [];
     const animations = [];
     let end = 0;
@@ -113,7 +113,7 @@
     const definitions = [
       ['.eyebrow',0,.3],['.contact-line',.1,.56],
       ['.contact-intro>span',.28,.65],['.contact-intro>p',.34,.76],
-      ['.contact-details>a',.43,.88],['.contact-details>p',.5,.94],['.resume-block>a',.55,1]
+      ['.contact-details>*',.43,.88],['.resume-block>a',.55,1]
     ];
     definitions.forEach(([selector,start,end])=>{
       contact.querySelectorAll(selector).forEach((element,i)=>{
