@@ -15,7 +15,9 @@ export function createPersistence(backend=cloud,root=process.cwd()) {
   if(!sqlite.prepare("SELECT name FROM sqlite_schema WHERE name='portfolio_state'").get()){
    for(const name of ['0000_portfolio_editor.sql','0001_editor_access.sql'])sqlite.exec(readFileSync(join(root,'drizzle',name),'utf8'));
    dirty=true;
-   if(seed){
+  }
+  if(seed&&!sqlite.prepare('SELECT 1 FROM portfolio_state LIMIT 1').get()&&!sqlite.prepare('SELECT 1 FROM portfolio_releases LIMIT 1').get()){
+   dirty=true;
     const data=JSON.parse(gunzipSync(Buffer.from(seed,'base64')).toString());
     if(data.format!=='portfolio-transfer-v1')throw Error('Invalid migration format');
     if(data.draft?.state)sqlite.prepare("INSERT INTO portfolio_state(slot,revision,content,saved_at) VALUES ('draft',?,?,?)").run(data.draft.revision||1,JSON.stringify(data.draft.state),data.draft.savedAt||new Date().toISOString());
@@ -26,7 +28,6 @@ export function createPersistence(backend=cloud,root=process.cwd()) {
      else sqlite.prepare('INSERT INTO portfolio_releases(revision,content,saved_at) VALUES (1,?,?)').run(raw,stamp);
     }
     for(const row of data.media||[])sqlite.prepare('INSERT INTO portfolio_media(id,name,mime,bytes,created_at) VALUES (?,?,?,?,?)').run(row.id,row.name,row.mime,row.bytes,row.created_at);
-   }
   }
   if(!sqlite.prepare("SELECT name FROM sqlite_schema WHERE name='portfolio_migration'").get()){sqlite.exec('CREATE TABLE portfolio_migration (id INTEGER PRIMARY KEY, completed_at TEXT NOT NULL)');dirty=true;}
   const DB={prepare(query){const statement=sqlite.prepare(query);const values=(...args)=>({
