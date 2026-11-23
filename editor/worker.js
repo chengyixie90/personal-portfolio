@@ -46,7 +46,7 @@ function validationError(state) {
         }
         continue;
       }
-      if(!short(b.title,150)||!short(b.text,16000)||!short(b.alt,300)||!short(b.caption,500)||!isAsset(b.src)||!isAsset(b.poster)||
+      if(!short(b.subtitles??'',20000)||!short(b.transcript??'',16000)||((b.subtitles||'').trim()&&!/^WEBVTT(?:[ \t]|\r?\n|$)/.test(b.subtitles.trim()))||!short(b.title,150)||!short(b.text,16000)||!short(b.alt,300)||!short(b.caption,500)||!isAsset(b.src)||!isAsset(b.poster)||
         !hasOwn(STYLES.width,b.width)||!hasOwn(STYLES.space,b.space)||!hasOwn(STYLES.ratio,b.ratio)||
         !['image-left','image-right'].includes(b.align)||typeof b.loop!=='boolean'||!Array.isArray(b.items)||b.items.length>40||
         b.items.some(item=>!isRecord(item)||!item.src||!isAsset(item.src)||!short(item.alt,300)||!short(item.caption,500)))
@@ -269,6 +269,7 @@ function getPage(data,route,preview=false) {
   return project?projectMarkup(data,project):null;
 }
 function preparePage(markup,pathname,canvas=false) {
+  markup=upgradeInterface(markup);
   if(canvas==='edit')markup=markup.replace(/<script\s+src="\/?(?:case-motion|motion-init|motion)\.js(?:\?[^"]*)?"\s*><\/script>/g,'');
   const page=markup.replace(/<head>/i,'<head><base href="/">')
     .replace(/(href=["'])(#[^"']*)(["'])/g, (_,before,hash,after)=>before+E(pathname)+hash+after)

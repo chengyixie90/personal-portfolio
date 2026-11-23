@@ -297,7 +297,12 @@ function field(label,obj,key,options={}) {
   const {list:values, textArea=false, max, fallback='', disabled=false, update=()=>{}, inputType='text'}=options;
   const kind=values?'select':textArea?'textarea':'input';
   const input=make(kind,null);
+  input.name=key;
+  input.autocomplete='off';
   if(kind==='input')input.type=inputType;
+  if(['email','url','tel'].includes(inputType)){input.inputMode=inputType==='tel'?'tel':inputType;input.spellcheck=false;}
+  if(inputType==='email')input.autocomplete='email';
+  if(inputType==='tel')input.autocomplete='tel';
   if(values)for(const [v,t] of Object.entries(values))input.append(make('option',t,{value:v}));
   if(max)input.maxLength=max;
   input.value=obj[key]??fallback;
@@ -458,7 +463,7 @@ function blockCard(project,block,index) {
       if(['image','split','grid','gallery','video'].includes(block.type))form.append(field('显示比例',block,'ratio',{list:STYLES.ratio}));
       if(block.type==='split')form.append(field('图文位置',block,'align',{list:{'image-left':'图左文右','image-right':'图右文左'}}));
       if(['image','split'].includes(block.type))form.append(resource('图片',block,'src','image'),field('图片描述',block,'alt',{max:300}),field('图注',block,'caption',{max:500}));
-      if(block.type==='video')form.append(resource('视频',block,'src','video'),resource('视频封面',block,'poster','image'),field('视频说明',block,'caption',{max:500}));
+      if(block.type==='video')form.append(resource('视频',block,'src','video'),resource('视频封面',block,'poster','image'),field('视频说明',block,'caption',{max:500}),field('字幕（WebVTT，可选）',block,'subtitles',{textArea:true,max:20000}),field('完整文字说明／对白（可选）',block,'transcript',{textArea:true,max:16000}));
       if(block.type==='file')form.append(resource('PDF 文件',block,'src','file'),field('链接文字',block,'caption',{max:500}));
       if(block.type==='gallery')form.append(checkbox('循环滑动',block,'loop'));
       if(['gallery','grid'].includes(block.type))form.append(imageItems(block));
@@ -618,15 +623,17 @@ function showHome() {
   const text=(key,options={})=>field(HOME_TEXT_FIELDS[key],s,key,{fallback:h[key],max:10000,...options});
   const rows=s.aboutRows.map((row,index)=>cell('panel home-list-item',
     cell('block-head',make('span','信息 '+(index+1)),actions(...controls(s.aboutRows,index,'个人信息'),button('删除信息',()=>{
+      if(!confirm('删除这条个人信息？'))return;
       s.aboutRows.splice(index,1);changed();render();
     },'compact danger'))),
     field('信息标题',row,'label',{max:120}),field('信息内容',row,'text',{textArea:true,max:4000})));
   const contacts=s.contacts.map((item,index)=>cell('panel home-list-item',
     cell('block-head',make('span','联系方式 '+(index+1)),actions(...controls(s.contacts,index,'联系方式'),button('删除联系方式',()=>{
+      if(!confirm('删除这条联系方式？'))return;
       s.contacts.splice(index,1);changed();render();
     },'compact danger'))),
     field('联系方式类型',item,'type',{list:CONTACT_TYPES,update:()=>render()}),
-    field('联系标签',item,'label',{max:120}),field('联系内容',item,'value',{max:1000}),
+    field('联系标签',item,'label',{max:120}),field('联系内容',item,'value',{max:1000,inputType:item.type==='email'?'email':item.type==='phone'?'tel':'text'}),
     ...(item.type==='link'?[field('链接地址',item,'href',{max:2000,inputType:'url'})]:[])));
   const addInfo=button('添加个人信息',()=>{
     s.aboutRows.push({id:'about-info-'+makeId(),label:'新信息',text:''});changed();render();

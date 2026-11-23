@@ -30,6 +30,8 @@ for(const name of [
 
 const implementation = [
   'const APP = '+JSON.stringify(bundle)+';',
+  'const IMAGE_DIMENSIONS = '+read('image-dimensions.json')+';',
+  read('interface-upgrades.js'),
   'const ADMIN_HTML = '+JSON.stringify(read('admin.html'))+';',
   read('portfolio-rules.js'),
   read('portfolio-home.js'),

@@ -145,7 +145,7 @@ function editableBlock(block, canvas=false) {
   }
   if((block.type==='grid'||block.type==='gallery')&&canvas)body+=assetButton('items.add','添加图片');
   if(block.type==='video') {
-    body+=block.src?'<video class="portfolio-video ratio-'+block.ratio+'" controls playsinline preload="metadata" '+(block.poster?'poster="'+E(block.poster)+'"':'')+' aria-label="'+E(block.title||'项目视频')+'" src="'+E(block.src)+'"></video>'+label:'';
+    body+=block.src?'<video class="portfolio-video ratio-'+block.ratio+'" controls playsinline preload="metadata" '+(block.poster?'poster="'+E(block.poster)+'"':'')+' aria-label="'+E(block.title||'项目视频')+'" src="'+E(block.src)+'">'+(block.subtitles?'<track kind="captions" srclang="zh-CN" label="中文字幕" default src="data:text/vtt;charset=utf-8,'+E(encodeURIComponent(block.subtitles.trim()))+'">':'')+'</video>'+label+(block.transcript?'<details class="video-transcript"><summary>查看视频文字说明</summary><p>'+lines(block.transcript)+'</p></details>':''):'';
     body+=assetButton('src',block.src?'替换视频':'上传视频');
   }
   if(block.type==='file')body+=(block.src?'<a class="text-link" href="'+E(block.src)+'" target="_blank" rel="noopener">'+E(block.caption || '查看文件')+'</a>':'')+assetButton('src',block.src?'替换文件':'选择 PDF');
@@ -184,7 +184,7 @@ function projectMarkup(state,project,canvas=false) {
     ['style','flow','motion','case-motion','galleries','portfolio-blocks'].map(name=>'<link rel="stylesheet" href="/'+name+'.css">').join('')+
     '</head><body class="flow-page portfolio-editable"><header><a class="logo" href="/">谢易宸 <span>PORTFOLIO</span></a><nav aria-label="主导航"><a href="/#work">返回作品集</a><a href="/#contact">联系</a></nav></header><main>'+
     '<section class="case-opening"><div class="case-heading"><div><p class="eyebrow">'+(order<0?'':number(order+1)+' / ')+E(CATEGORIES[project.category])+'</p><h1'+(canvas?canvasAttr('text','project.title'):'')+'>'+E(project.title)+'</h1></div><p class="case-summary"'+(canvas?canvasAttr('text','project.summary'):'')+'>'+E(project.summary)+'</p></div>'+
-    (project.cover?'<figure class="portfolio-hero">'+jpg(project.cover,project.title)+'</figure>':'')+'</section>'+nav+cells.join('')+
+    (project.cover?'<figure class="portfolio-hero">'+jpg(project.cover,project.title,'data-critical-image')+'</figure>':'')+'</section>'+nav+cells.join('')+
     projectNavigation(state,project)+'</main><footer><span>谢易宸 · 作品集</span><a href="#">回到顶部</a></footer>'+blankViewer()+
     ['content','flow','motion','case-motion','galleries'].map(name=>'<script src="/'+name+'.js"></script>').join('')+'</body></html>';
 }

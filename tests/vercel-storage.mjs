@@ -33,6 +33,23 @@ assert.equal((await publicApp(req('/api/editor/publish','POST',{revision:d.draft
 assert.equal((await publicApp(req(media.url,'GET',null,{cookie:'',range:'bytes=0-127'}))).status,206);
 assert.ok((await (await publicApp(req('/'))).text()).includes('Vercel 持久保存验收'));
 assert.equal([...blobs.keys()].filter(k=>k.startsWith('portfolio/chunks/')).length,0);
+// Interface upgrades must reach actual server-rendered pages, including legacy templates.
+const homeHTML=await (await publicApp(req('/'))).text();
+assert.match(homeHTML,/class="skip-link"/);
+assert.match(homeHTML,/id="main-content"/);
+assert.match(homeHTML,/name="theme-color"/);
+assert.match(homeHTML,/interface-upgrades\.css/);
+assert.match(homeHTML,/<img[^>]+poetry-cover[^>]+width="/);
+const demo=structuredClone(d.draft.state);
+const project={id:crypto.randomUUID(),slug:'interface-demo',title:'界面测试',summary:'',category:'video',cover:'/assets/ad30-poster.webp',state:'hidden',blocks:[{id:'video-demo',type:'video',title:'示例',text:'',motion:'inherit',width:'normal',space:'normal',ratio:'landscape',align:'image-left',items:[],src:'/assets/ad30.mp4',poster:'',caption:'说明',alt:'',loop:false,subtitles:'WEBVTT\n\n00:00.000 --> 00:01.000\n字幕',transcript:'完整说明 <script>alert(1)</script>'}]};
+demo.projects.push(project);
+response=await publicApp(req('/api/editor/canvas','POST',{state:demo,projectId:project.id,animate:false}));
+assert.equal(response.status,200);
+const canvasHTML=await response.text();
+assert.match(canvasHTML,/loading="eager" fetchpriority="high"/);
+assert.match(canvasHTML,/<track kind="captions"/);
+assert.match(canvasHTML,/&lt;script&gt;alert/);
+assert.match(canvasHTML,/查看视频文字说明/);
 assert.equal((await publicApp(req('/api/editor/auth','POST',{action:'logout'}))).status,200);
 assert.equal((await publicApp(req('/api/editor/state'))).status,403);
 console.log('PASS: private persistent storage, fresh-process reload, conditional writes, protected setup, spoof denial, chunk upload, draft media isolation, publish, byte ranges and logout.');
